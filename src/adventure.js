@@ -1,10 +1,10 @@
 import readline from 'readline';
 import { stdin as input, stdout as output } from 'process';
 
-class adventure {
-    constructor(actionUser, heroCreate, chooseFaction,  executionAttack) {
-                r1 = readline.createInterface({ input, output});
-                this.startGame;
+class Adventure {
+    constructor() {
+                this.r1 = readline.createInterface({ input, output});
+                this.startGame();
     }
 
    startGame() {
@@ -21,35 +21,66 @@ class adventure {
     }
 
     heroCreate(name,age){
-        this.nameHero = nameHero;
+        this.nameHero = name;
         this.age = age;
         console.log(`Nome do Héroi: ${this.nameHero}`);
         console.log(`Idade: ${this.age}`);
     }
 
-    chooseFaction() {
-        switch (this.chooseFaction.faction()) {
+    askFaction() {
+        console.log('Escolha sua Facção:');
+        console.log('1 - Magos!');
+        console.log('2 - Guerreiros!');
+        console.log('3 - Monges!');
+        console.log('4 - Ninjas!');
+
+        this.r1.question('Digite o número da sua Facção: ', (choose) => {
+            this.chooseFaction(choose);
+            this.executionAttack();
+            this.r1.close();
+        });
+    }
+
+    chooseFaction(choose) {
+        switch (choose) {
             case '1':
-                faction = 'Mago';
+                this.faction = 'Mago';
                 break;
             case '2':
-                faction = 'Guerreiro';
+                this.faction = 'Guerreiro';
                 break;
             case '3':
-                faction = 'Monge';
+                this.faction = 'Monge';
                 break;
             case '4':
-                faction = 'Ninja';
+                this.faction = 'Ninja';
                 break;
             default:
                 console.log('Opção Inválida.');
-            this.r1.close;
-            return;
+            break;
         }
+        console.log(`Facção Escolhida: ${this.faction}`);
     }
 
     executionAttack() {
-        wizard
+        console.log(`${this.nameHero}, da Facção ${this.faction}, prepara-se para atacar!`);
+
+        switch(this.faction) {
+            case 'Mago':
+                console.log('Lança Rajada de Raios!');
+            break;
+            case 'Guerreiro':
+                console.log('Ataca com sua espada Poderosa!');
+            break;
+            case 'Monge':
+                console.log('Ataca com suas habilidade de Artes Marciais!');
+            case 'Ninja':
+                console.log('Ataca usando Shuriken!');
+            break;
+                console.log('Ataque falhou...');
+        }
     }
 
 }
+
+new Adventure();
